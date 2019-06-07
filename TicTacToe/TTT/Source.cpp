@@ -9,7 +9,7 @@ using namespace std;
 
 static int turn = 0;
 char board[MAX][MAX];
-char p1[20], p2[20];
+char p1[30], p2[30];
 char p1Play[3], p2Play[3];
 int row, col;
 bool result1, result2;
@@ -51,11 +51,11 @@ void GameStart() {
 		ExitGame();
 	}
 	cout << "Enter Player 1 Name:" << endl;
-	cin >> p1;
-	cout << "Enter Player 2 Name:" << endl;
-	cin >> p2;
 	cin.ignore();
-	system("cls");
+	cin.get(p1, 30);
+	cout << "Enter Player 2 Name:" << endl;
+	cin.ignore();
+	cin.get(p2, 30);
 	DrawTable();
 }
 
