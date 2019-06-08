@@ -1,6 +1,7 @@
 #include <iostream>
 #include <conio.h>
 #include <string.h>
+#include <time.h>
 
 //Co the thay doi kich thuoc ban co va so quan de thang
 #define MAX 3 // Kich thuoc cua ban co 3x3
@@ -198,8 +199,19 @@ bool CheckWin(char k,int row,int col) {
 }
 
 void Play() {
+	int first = 0;
 	while (!EndGame())
 	{
+		if (first == 0)
+		{
+			//Chon nguoi choi dau ngau nhien
+			srand(time(NULL));
+			int first = rand() % 2 + 1;
+			if (first == 1)
+				goto p1Turn;
+			else
+				goto p2Turn;
+		}
 		p1Turn:
 		cout << "Your Turn " << p1 << ": - O" << endl;
 		cin >> p1Play;
