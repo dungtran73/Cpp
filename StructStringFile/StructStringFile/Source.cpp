@@ -80,7 +80,6 @@ void Input()
 	}
 	else
 		st = new Student[s + 1];
-	//st = new Student*[s+1];
 	int id_temp;
 	do
 	{
@@ -126,10 +125,38 @@ void Display()
 
 void Save()
 {
+	FILE *fp = fopen("StudentList.dat", "a+");
+	for (int i = 0; i <= s; i++)
+	{
+		fprintf(fp, "%d %s %f\n", (st + i)->id, (st + i)->name, (st + i)->score);
+	}
+	cout << "Saved to StudentList.dat" << endl;
+	fclose(fp);
 }
 
 void Load()
 {
+	char* fcontent = NULL;
+	int fsize = 0;
+	FILE *fp = fopen("StudentList.dat", "r");
+	if (fp!=nullptr)
+	{
+		fseek(fp, 0, SEEK_END);
+		fsize = ftell(fp);
+		rewind(fp);
+
+		fcontent = new char[fsize + 1];
+		fread(fcontent, 1, fsize, fp);
+		fcontent[fsize] = '\0';
+		fclose(fp);
+
+		cout << fcontent << endl;
+
+	}
+	else
+	{
+		cout << "LOAD ERROR" << endl;
+	}
 }
 
 void Exit()
