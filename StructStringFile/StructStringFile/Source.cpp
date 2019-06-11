@@ -11,13 +11,13 @@ struct Student
 	string name;
 };
 Student *st;
-static int s = -1; //So luong sinh vien trong mang
+static int s = 0; //So luong sinh vien trong mang
 int num;
 void Replace(string &str, char to, char by);
 void Input();
 void Display();
-void Save();
-void Load();
+void SaveToFile();
+void LoadFromFile();
 void Exit();
 bool CheckId(int id);
 void main()
@@ -42,10 +42,10 @@ void main()
 			Display();
 			break;
 		case 3:
-			Save();
+			SaveToFile();
 			break;
 		case 4:
-			Load();
+			LoadFromFile();
 			break;
 		case 0:
 			Exit();
@@ -68,22 +68,22 @@ void Replace(string &str,char to,char by)
 }
 void Input()
 {
-	s++;
+	//LoadFromFile();
 	
-	if (s > 0)
+	s++;
+	if (s>1)
 	{
+		//Sao chep data tu st sang st_temp
 		Student *st_temp = new Student[s];
-		//Copy data from st to st_temp
-		for (int i = 0; i < s; i++)
+		for (int i = 0; i <s - 1; i++)
 		{
 			(st_temp + i)->id = (st + i)->id;
 			(st_temp + i)->name = (st + i)->name;
 			(st_temp + i)->score = (st + i)->score;
 		}
-		// Resize st
-		st = new Student[s + 1];
-		//Copy data from st_temp to st
-		for (int i = 0; i < s; i++)
+		st = new Student[s];
+		//Sao chep data tu st_temp sang st
+		for (int i = 0; i <s-1; i++)
 		{
 			(st + i)->id = (st_temp + i)->id;
 			(st + i)->name = (st_temp + i)->name;
@@ -91,7 +91,9 @@ void Input()
 		}
 	}
 	else
-		st = new Student[s + 1];
+	{
+		st = new Student[1];
+	}
 	int id_temp;
 	do
 	{
@@ -102,10 +104,10 @@ void Input()
 			cout << "Duplicated student ID" << endl;
 		}
 	} while (!CheckId(id_temp));
-	(st+s)->id = id_temp;
+	(st+s-1)->id = id_temp;
 	cin.ignore();
 	cout << "Enter full name: ";
-	getline(cin,(st+s)->name);
+	getline(cin,(st+s-1)->name);
 	float scr;
 	do
 	{
@@ -114,13 +116,12 @@ void Input()
 		if (scr > 10 || scr < 0)
 			cout << "Invalid input" << endl;
 	} while (scr>10 ||scr<0);
-	(st+s)->score = scr;
-	//cin.ignore();
+	(st+s-1)->score = scr;
 }
 
 void Display()
 {
-	//Load();
+	//LoadFromFile();
 	system("cls");
 	if (s<0)
 	{
@@ -130,22 +131,21 @@ void Display()
 	else
 	{ 
 		cout <<setw(10)<<left<<"ID"<<setw(35)<<left<<"FULL NAME"<<setw(5)<<left<<"SCORE"<< endl;
-		for (int i = 0; i < num+s; i++)
+		for (int i = 0; i < s; i++)
 		{
 			cout <<setw(10)<<left<< (st+i)->id <<setw(35)<<left << (st+i)->name << setw(5) <<left<< (st+i)->score << endl;
 		}
 	}
 }
 
-void Save()
+void SaveToFile()
 {
-	Load();
 	ofstream outfile;
 	outfile.open("StudentList.txt",ios::trunc);
 	if (outfile.is_open())
 	{
-		outfile << s+1 << endl;
-		for (int i = 0; i <= s; i++)
+		outfile << s << endl;
+		for (int i = 0; i < s; i++)
 		{
 			outfile << (st + i)->id << " ";
 			string fullname((st + i)->name);
@@ -160,19 +160,14 @@ void Save()
 	}
 }
 
-void Load()
+void LoadFromFile()
 {
-	if (s<0)
-	{
-		s = 0;
-	}
-	
 	ifstream infile;
 	infile.open("StudentList.txt");
 	if (infile.is_open())
 	{
 		infile >> num;
-		Student *st_temp = new Student[num + s];
+		Student *st_temp = new Student[num];
 		if (num > 0)
 		{
 			//cout << num << endl;
@@ -190,20 +185,12 @@ void Load()
 				(st_temp + i)->name = sv->name;
 				(st_temp + i)->score = sv->score;
 			}		
-			int j = 0;
-			//Sao chep data tu st sang st_temp
-			for (int i = num; i <num + s; i++)
-			{
-				
-				(st_temp + i)->id = (st + j)->id;
-				(st_temp + i)->name = (st + j)->name;
-				(st_temp + i)->score = (st + j)->score;
-				j++;
-			}
+			
 			// Tang kich thuoc cua mang
-			st = new Student[num + s];
+			st = new Student[num];
+			s = num;
 			//Sao chep data tu st_temp sang st
-			for (int i = 0; i < num + s; i++)
+			for (int i = 0; i < num; i++)
 			{
 				(st + i)->id = (st_temp + i)->id;
 				(st + i)->name = (st_temp + i)->name;
@@ -228,7 +215,7 @@ void Exit()
 
 bool CheckId(int id)
 {
-	for (int i = 0; i <= s; i++)
+	for (int i = 0; i < s; i++)
 	{
 		if (id==(st+i)->id)
 		{
