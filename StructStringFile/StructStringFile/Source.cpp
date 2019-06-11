@@ -12,7 +12,7 @@ struct Student
 };
 Student *st;
 static int s = -1; //So luong sinh vien trong mang
-void InputFromFile(int num);
+int num;
 void Replace(string &str, char to, char by);
 void Input();
 void Display();
@@ -70,19 +70,19 @@ void Input()
 {
 	s++;
 	
-	Student *st_temp =new Student[s];
 	if (s > 0)
 	{
-		//Sao chep data tu st sang st_temp
+		Student *st_temp = new Student[s];
+		//Copy data from st to st_temp
 		for (int i = 0; i < s; i++)
 		{
 			(st_temp + i)->id = (st + i)->id;
 			(st_temp + i)->name = (st + i)->name;
 			(st_temp + i)->score = (st + i)->score;
 		}
-		// Tang kich thuoc cua mang
+		// Resize st
 		st = new Student[s + 1];
-		//Sao chep data tu st_temp sang st
+		//Copy data from st_temp to st
 		for (int i = 0; i < s; i++)
 		{
 			(st + i)->id = (st_temp + i)->id;
@@ -120,6 +120,8 @@ void Input()
 
 void Display()
 {
+	//Load();
+	system("cls");
 	if (s<0)
 	{
 		cout << "Student list is empty!" << endl;
@@ -128,7 +130,7 @@ void Display()
 	else
 	{ 
 		cout <<setw(10)<<left<<"ID"<<setw(35)<<left<<"FULL NAME"<<setw(5)<<left<<"SCORE"<< endl;
-		for (int i = 0; i <= s; i++)
+		for (int i = 0; i < num+s; i++)
 		{
 			cout <<setw(10)<<left<< (st+i)->id <<setw(35)<<left << (st+i)->name << setw(5) <<left<< (st+i)->score << endl;
 		}
@@ -158,43 +160,13 @@ void Save()
 	}
 }
 
-void InputFromFile(int num)
-{
-	Student *st_temp = new Student[num+s];
-	if (num > 0)
-	{
-		//Sao chep data tu file sang st_temp
-		for (int i = 0; i <num; i++)
-		{
-			(st_temp + i)->id = (st + i)->id;
-			(st_temp + i)->name = (st + i)->name;
-			(st_temp + i)->score = (st + i)->score;
-		}
-		//Sao chep data tu st sang st_temp
-		for (int i = num; i <num+s; i++)
-		{
-			(st_temp + i)->id = (st + i)->id;
-			(st_temp + i)->name = (st + i)->name;
-			(st_temp + i)->score = (st + i)->score;
-		}
-		// Tang kich thuoc cua mang
-		st = new Student[num + s];
-		//Sao chep data tu st_temp sang st
-		for (int i = 0; i < num+s; i++)
-		{
-			(st + i)->id = (st_temp + i)->id;
-			(st + i)->name = (st_temp + i)->name;
-			(st + i)->score = (st_temp + i)->score;
-		}
-	}
-}
 void Load()
 {
 	if (s<0)
 	{
 		s = 0;
 	}
-	int num;
+	
 	ifstream infile;
 	infile.open("StudentList.txt");
 	if (infile.is_open())
@@ -203,37 +175,30 @@ void Load()
 		Student *st_temp = new Student[num + s];
 		if (num > 0)
 		{
-			string fullname;
-			Student *sv = new Student;
-			infile >> sv->id;
-			infile >> fullname;
-			Replace(fullname, '_', ' ');
-			sv->name = fullname;
-			infile >> sv->score;
+			//cout << num << endl;
 			//Sao chep data tu file sang st_temp
 			for (int i = 0; i <num; i++)
 			{
+				string fullname;
+				Student *sv = new Student;
+				infile >> sv->id;
+				infile >> fullname;
+				Replace(fullname, '_', ' ');
+				sv->name = fullname;
+				infile >> sv->score;
 				(st_temp + i)->id = sv->id;
 				(st_temp + i)->name = sv->name;
 				(st_temp + i)->score = sv->score;
-			}
-			if (s>0)
-			{
-				//Sao chep data tu file sang st_temp
-				for (int i = 0; i <num; i++)
-				{
-					(st_temp + i)->id = (st + i)->id;
-					(st_temp + i)->name = (st + i)->name;
-					(st_temp + i)->score = (st + i)->score;
-				}
-			}
-			
+			}		
+			int j = 0;
 			//Sao chep data tu st sang st_temp
 			for (int i = num; i <num + s; i++)
 			{
-				(st_temp + i)->id = (st + i)->id;
-				(st_temp + i)->name = (st + i)->name;
-				(st_temp + i)->score = (st + i)->score;
+				
+				(st_temp + i)->id = (st + j)->id;
+				(st_temp + i)->name = (st + j)->name;
+				(st_temp + i)->score = (st + j)->score;
+				j++;
 			}
 			// Tang kich thuoc cua mang
 			st = new Student[num + s];
@@ -244,8 +209,14 @@ void Load()
 				(st + i)->name = (st_temp + i)->name;
 				(st + i)->score = (st_temp + i)->score;
 			}
+			cout << "Loaded data from StudentList.txt" << endl;
+		}
+		else
+		{
+			cout << "File is empty!" << endl;
 		}
 	}
+	
 	infile.close();
 }
 
