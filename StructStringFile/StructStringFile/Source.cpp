@@ -12,6 +12,8 @@ struct Student
 };
 Student *st;
 static int s = -1; //So luong sinh vien trong mang
+void InputFromFile(int num);
+void Replace(string &str, char to, char by);
 void Input();
 void Display();
 void Save();
@@ -54,7 +56,16 @@ void main()
 	}
 	while (true);
 }
-
+void Replace(string &str,char to,char by)
+{
+	for (int i = 0; i < str.length(); i++)
+	{
+		if (str.at(i)==to)
+		{
+			str.at(i) = by;
+		}
+	}
+}
 void Input()
 {
 	s++;
@@ -126,13 +137,18 @@ void Display()
 
 void Save()
 {
+	Load();
 	ofstream outfile;
-	outfile.open("StudentList.txt",ios::app);
+	outfile.open("StudentList.txt",ios::trunc);
 	if (outfile.is_open())
 	{
+		outfile << s+1 << endl;
 		for (int i = 0; i <= s; i++)
 		{
-			outfile << (st + i)->id << " " << (st + i)->name << " " << (st + i)->score << endl;
+			outfile << (st + i)->id << " ";
+			string fullname((st + i)->name);
+			Replace(fullname, ' ', '_');
+			outfile << fullname << " " << (st + i)->score << endl;
 		}
 		cout << "Saved to StudentList.txt" << endl;
 	}
@@ -142,9 +158,95 @@ void Save()
 	}
 }
 
+void InputFromFile(int num)
+{
+	Student *st_temp = new Student[num+s];
+	if (num > 0)
+	{
+		//Sao chep data tu file sang st_temp
+		for (int i = 0; i <num; i++)
+		{
+			(st_temp + i)->id = (st + i)->id;
+			(st_temp + i)->name = (st + i)->name;
+			(st_temp + i)->score = (st + i)->score;
+		}
+		//Sao chep data tu st sang st_temp
+		for (int i = num; i <num+s; i++)
+		{
+			(st_temp + i)->id = (st + i)->id;
+			(st_temp + i)->name = (st + i)->name;
+			(st_temp + i)->score = (st + i)->score;
+		}
+		// Tang kich thuoc cua mang
+		st = new Student[num + s];
+		//Sao chep data tu st_temp sang st
+		for (int i = 0; i < num+s; i++)
+		{
+			(st + i)->id = (st_temp + i)->id;
+			(st + i)->name = (st_temp + i)->name;
+			(st + i)->score = (st_temp + i)->score;
+		}
+	}
+}
 void Load()
 {
-	
+	if (s<0)
+	{
+		s = 0;
+	}
+	int num;
+	ifstream infile;
+	infile.open("StudentList.txt");
+	if (infile.is_open())
+	{
+		infile >> num;
+		Student *st_temp = new Student[num + s];
+		if (num > 0)
+		{
+			string fullname;
+			Student *sv = new Student;
+			infile >> sv->id;
+			infile >> fullname;
+			Replace(fullname, '_', ' ');
+			sv->name = fullname;
+			infile >> sv->score;
+			//Sao chep data tu file sang st_temp
+			for (int i = 0; i <num; i++)
+			{
+				(st_temp + i)->id = sv->id;
+				(st_temp + i)->name = sv->name;
+				(st_temp + i)->score = sv->score;
+			}
+			if (s>0)
+			{
+				//Sao chep data tu file sang st_temp
+				for (int i = 0; i <num; i++)
+				{
+					(st_temp + i)->id = (st + i)->id;
+					(st_temp + i)->name = (st + i)->name;
+					(st_temp + i)->score = (st + i)->score;
+				}
+			}
+			
+			//Sao chep data tu st sang st_temp
+			for (int i = num; i <num + s; i++)
+			{
+				(st_temp + i)->id = (st + i)->id;
+				(st_temp + i)->name = (st + i)->name;
+				(st_temp + i)->score = (st + i)->score;
+			}
+			// Tang kich thuoc cua mang
+			st = new Student[num + s];
+			//Sao chep data tu st_temp sang st
+			for (int i = 0; i < num + s; i++)
+			{
+				(st + i)->id = (st_temp + i)->id;
+				(st + i)->name = (st_temp + i)->name;
+				(st + i)->score = (st_temp + i)->score;
+			}
+		}
+	}
+	infile.close();
 }
 
 void Exit()
