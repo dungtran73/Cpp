@@ -44,9 +44,13 @@ int MyPoint::GetY()
 	return mPosY;
 }
 
-float MyPoint::Distance(MyPoint p)
+float MyPoint::Distance( MyPoint p)
 {
-	float d = sqrt((p.GetX() - this->GetX)*(p.GetX() - this->GetX)
-				  +(p.GetY() - this->GetY())*(p.GetY() - this->GetY()));
+	float x1 = this->GetX(),
+		x2 = p.GetX();
+	float y1 = this->GetY(),
+		y2 = p.GetY();
+	float d = sqrt(( x2 - x1 )*(x2 - x1)
+				  +(y2 - y1)*(y2 - y1));
 	return d;
 }
