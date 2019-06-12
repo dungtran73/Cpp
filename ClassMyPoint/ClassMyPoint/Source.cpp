@@ -16,5 +16,8 @@ void main()
 	p3->Display();
 	cout << "Distance between P1 and P2: " << p1->Distance(*p2) << endl;
 	cout << "Distance between P1 and P3: " << p1->Distance(*p3) << endl;
+	delete p1;
+	delete p3;
+	delete p2;
 	system("pause");
 }
