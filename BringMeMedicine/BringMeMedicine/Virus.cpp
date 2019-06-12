@@ -36,4 +36,12 @@ void Virus::LoadADNInformation()
 void Virus::ReduceResistance(int medicine_resistance)
 {
 	m_resistance -= medicine_resistance;
+	if (m_resistance<=0)
+	{
+		this->DoDie();
+	}
+	else
+	{
+		this->DoClone();
+	}
 }
