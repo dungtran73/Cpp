@@ -23,9 +23,12 @@ void Virus::LoadADNInformation()
 {
 	ifstream fp;
 	fp.open("ATGX.bin", ios::in);
-	if (fp.is_open)
+	if (fp.is_open())
 	{
-		fp >> m_dna;
+		char s[100];
+		fp >> s;
+		m_dna = (char *)s;
+		fp.close();
 	}
 	else
 	{
@@ -36,12 +39,4 @@ void Virus::LoadADNInformation()
 void Virus::ReduceResistance(int medicine_resistance)
 {
 	m_resistance -= medicine_resistance;
-	if (m_resistance<=0)
-	{
-		this->DoDie();
-	}
-	else
-	{
-		this->DoClone();
-	}
 }

@@ -7,9 +7,12 @@ private:
 public:
 	Dengue();
 	~Dengue();
+	Dengue(Dengue *vr);
 	void DoBorn();
 	void DoClone();
 	void DoDie();
 	void InitResistance();
+
+	int GetResistance();
 };
 

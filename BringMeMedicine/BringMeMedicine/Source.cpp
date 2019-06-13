@@ -6,7 +6,7 @@ int main()
 {
 	Patient p;
 	char t = 0;
-	while (p.GetState() == 1)
+	/*while (p.GetState() == 1)
 	{
 		printf("Take Medicine (0 = NO, 1 = YES");
 		scanf("%c", &t);
@@ -18,5 +18,6 @@ int main()
 				p.TakeMedicine(medicine_resistance);
 
 		}
-	}
+	}*/
+	system("pause");
 }

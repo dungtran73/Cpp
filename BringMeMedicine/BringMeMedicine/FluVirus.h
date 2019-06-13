@@ -8,9 +8,12 @@ private:
 public:
 	FluVirus();
 	~FluVirus();
+	FluVirus(FluVirus * vr);
 	void DoBorn();
 	void DoClone();
 	void DoDie();
 	void InitResistance();
+
+	int GetResistance();
 };
 

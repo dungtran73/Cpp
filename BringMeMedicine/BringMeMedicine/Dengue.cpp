@@ -13,6 +13,13 @@ Dengue::~Dengue()
 {
 }
 
+Dengue::Dengue(Dengue * vr)
+{
+	this->m_dna = vr->m_dna;
+	strcpy( this->m_protein,vr->m_protein);
+	this->m_resistance = vr->m_resistance;
+}
+
 void Dengue::DoBorn()
 {
 	LoadADNInformation();
@@ -62,4 +69,9 @@ void Dengue::InitResistance()
 			m_resistance = rand() % 10 + 21;
 		}
 	}
+}
+
+int Dengue::GetResistance()
+{
+	return m_resistance;
 }

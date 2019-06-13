@@ -1,5 +1,7 @@
 #pragma once
 #include "Virus.h"
+#include "FluVirus.h"
+#include "Dengue.h"
 #include <iostream>
 #include <list>
 
@@ -20,5 +22,6 @@ public:
 	void TakeMedicine(int);
 	void DoDie();
 	int GetState();
+	
 };
 

@@ -13,6 +13,13 @@ FluVirus::~FluVirus()
 {
 }
 
+FluVirus::FluVirus(FluVirus * vr)
+{
+	this->m_color = vr->m_color;
+	strcpy(this->m_dna, vr->m_dna);
+	this->m_resistance = vr->m_resistance;
+}
+
 void FluVirus::DoBorn()
 {
 	LoadADNInformation();
@@ -42,4 +49,9 @@ void FluVirus::InitResistance()
 	{
 		m_resistance = rand() % 11 + 5;
 	}
+}
+
+int FluVirus::GetResistance()
+{
+	return m_resistance;
 }
