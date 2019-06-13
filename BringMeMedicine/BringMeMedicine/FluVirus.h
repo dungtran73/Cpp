@@ -1,7 +1,6 @@
 #pragma once
 #include "Virus.h"
-#include <time.h>
-#include <cstdlib>
+
 class FluVirus:public Virus
 {
 private:

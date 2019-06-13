@@ -1,5 +1,6 @@
 #pragma once
-class Dengue
+#include "Virus.h"
+class Dengue:public Virus 
 {
 private:
 	char m_protein[4];

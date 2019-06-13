@@ -4,6 +4,8 @@
 
 FluVirus::FluVirus()
 {
+	DoBorn();
+	DoClone();
 }
 
 
@@ -21,12 +23,23 @@ void FluVirus::DoBorn()
 
 void FluVirus::DoClone()
 {
+
 }
 
 void FluVirus::DoDie()
 {
+	delete this;
 }
 
 void FluVirus::InitResistance()
 {
+	srand(time(NULL));
+	if (m_color == 0x0000ff)	//red virus
+	{
+		m_resistance = rand() % 11 + 10;
+	}
+	else
+	{
+		m_resistance = rand() % 11 + 5;
+	}
 }

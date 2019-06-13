@@ -1,4 +1,7 @@
 #pragma once
+#include <time.h>
+#include <cstdlib>
+#include <cstring>
 class Virus
 {
 protected:
