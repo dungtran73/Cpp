@@ -17,5 +17,6 @@ public:
 	virtual void DoClone() = 0;
 	virtual void DoDie() = 0;
 	virtual void InitResistance()=0;
+	virtual int GetResistance()=0;
 };
 

@@ -21,6 +21,7 @@ void Patient::InitResistance()
 
 void Patient::DoStart()
 {
+	m_state = ALIVE;
 	int numOfviruses = rand() % 11 + 10;
 	for (int i = 0; i < numOfviruses; i++)
 	{
@@ -40,19 +41,34 @@ void Patient::DoStart()
 
 void Patient::TakeMedicine(int medicine_resistance)
 {
+	int TotalVirusResistance = 0;
 	list <Virus*>::iterator i;
 	for  (i = m_virusList.begin(); i != m_virusList.end(); i++)
 	{
 		(*i)->ReduceResistance(medicine_resistance);
+		if ((*i)->GetResistance()<=0)
+		{
+			m_virusList.erase(i);
+			i--;
+		}
+		
+	}
+	for (i = m_virusList.begin(); i != m_virusList.end(); i++)
+	{
+		TotalVirusResistance += (*i)->GetResistance();
+	}
+	if (m_resistence<TotalVirusResistance)
+	{
+		DoDie();
 	}
 }
 
 void Patient::DoDie()
 {
+	m_state = DIE;
 }
 
 int Patient::GetState()
 {
 	return m_state;
 }
-

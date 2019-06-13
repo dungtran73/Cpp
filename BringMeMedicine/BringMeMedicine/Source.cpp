@@ -5,11 +5,11 @@ using namespace std;
 int main()
 {
 	Patient p;
-	char t = 0;
-	/*while (p.GetState() == 1)
+	int t = 0;
+	while (p.GetState() == 1)
 	{
-		printf("Take Medicine (0 = NO, 1 = YES");
-		scanf("%c", &t);
+		printf("Take Medicine (0 = NO, 1 = YES) ");
+		scanf("%d", &t);
 		if (t == 1)
 		{
 			int min = 1;
@@ -18,6 +18,6 @@ int main()
 				p.TakeMedicine(medicine_resistance);
 
 		}
-	}*/
+	}
 	system("pause");
 }
