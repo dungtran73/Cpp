@@ -12,16 +12,17 @@ class Patient
 {
 private:
 	int m_resistence;
-	list<Virus*> m_virusList;
+	
 	int m_state;
 public:
 	Patient();
 	~Patient();
+	list<Virus*> m_virusList;
 	void InitResistance();
 	void DoStart();
 	void TakeMedicine(int);
 	void DoDie();
 	int GetState();
-	
+	int GetResistance();
 };
 
