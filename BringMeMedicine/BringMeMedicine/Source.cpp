@@ -4,6 +4,7 @@
 using namespace std;
 int main()
 {
+	srand(time(0));
 	Patient p;
 	int t = 0;
 	while (p.GetState() == 1)

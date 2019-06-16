@@ -23,7 +23,6 @@ Dengue::Dengue(Dengue * vr)
 void Dengue::DoBorn()
 {
 	LoadADNInformation();
-	srand(time(NULL));
 	int kind = rand() % 3;
 	if (kind==0)
 	{
@@ -53,7 +52,6 @@ void Dengue::DoDie()
 
 void Dengue::InitResistance()
 {
-	srand(time(NULL));
 	if (strcmp(m_dna,"NS3")==0)
 	{
 		m_resistance = rand() % 10 + 1;

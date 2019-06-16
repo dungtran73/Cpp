@@ -23,9 +23,9 @@ FluVirus::FluVirus(FluVirus * vr)
 void FluVirus::DoBorn()
 {
 	LoadADNInformation();
-	srand(time(NULL));
 	int color = rand() % 2;
 	m_color = (color == 0 ? 0xff0000 : 0x0000ff);
+	InitResistance();
 }
 
 void FluVirus::DoClone()
@@ -40,7 +40,6 @@ void FluVirus::DoDie()
 
 void FluVirus::InitResistance()
 {
-	srand(time(NULL));
 	if (m_color == 0x0000ff)	//red virus
 	{
 		m_resistance = rand() % 11 + 10;
