@@ -14,11 +14,12 @@ int main()
 		if (t == 1)
 		{
 			int min = 1;
-			int max = 60;
+			int max = 6;
 			int medicine_resistance = min + (rand() % (int)(max - min + 1));
 				p.TakeMedicine(medicine_resistance);
-
+				cout << "Medicin: " << medicine_resistance << endl;
 		}
 	}
+	cout << p.GetState();
 	system("pause");
 }

@@ -42,23 +42,27 @@ void Patient::DoStart()
 void Patient::TakeMedicine(int medicine_resistance)
 {
 	int TotalVirusResistance = 0;
-	list <Virus*>::iterator i;
-	for  (i = m_virusList.begin(); i != m_virusList.end(); i++)
+	list<Virus*>::iterator it = m_virusList.begin();
+	while (it != m_virusList.end())
 	{
 		list<Virus*>::iterator temp;
-		(*i)->ReduceResistance(medicine_resistance);
-		if ((*i)->GetResistance()<=0)
+		(*it)->ReduceResistance(medicine_resistance);
+		if ((*it)->GetResistance() <= 0)
 		{
-			temp=m_virusList.erase(i);
-			i = temp;
+			temp = m_virusList.erase(it);
+			it = temp;
+		}
+		else
+		{
+			it++;
 		}
 	}
-	
-	for (i = m_virusList.begin(); i != m_virusList.end(); i++)
+	for (list<Virus*>::iterator i = m_virusList.begin(); i != m_virusList.end(); i++)
 	{
 		TotalVirusResistance += (*i)->GetResistance();
-		cout << (*i)->GetResistance() << " - ";
+		cout << (*i)->GetResistance() << "  ";
 	}
+	cout << endl;
 	if (m_resistence<TotalVirusResistance)
 	{
 		DoDie();
