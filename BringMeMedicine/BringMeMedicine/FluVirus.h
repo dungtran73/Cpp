@@ -10,7 +10,7 @@ public:
 	~FluVirus();
 	FluVirus(FluVirus * vr);
 	void DoBorn();
-	void DoClone();
+	void DoClone(std::list<Virus*> &m_virusList);
 	void DoDie();
 	void InitResistance();
 

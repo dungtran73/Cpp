@@ -5,7 +5,7 @@
 FluVirus::FluVirus()
 {
 	DoBorn();
-	DoClone();
+	InitResistance();
 }
 
 
@@ -16,7 +16,7 @@ FluVirus::~FluVirus()
 FluVirus::FluVirus(FluVirus * vr)
 {
 	this->m_color = vr->m_color;
-	strcpy(this->m_dna, vr->m_dna);
+	this->m_dna = vr->m_dna;
 	this->m_resistance = vr->m_resistance;
 }
 
@@ -28,9 +28,10 @@ void FluVirus::DoBorn()
 	InitResistance();
 }
 
-void FluVirus::DoClone()
+void FluVirus::DoClone(std::list<Virus*> &m_virusList)
 {
-
+	Virus *vr = new FluVirus(this);
+	m_virusList.push_front(vr);
 }
 
 void FluVirus::DoDie()

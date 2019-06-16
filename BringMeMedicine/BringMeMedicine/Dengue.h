@@ -1,5 +1,6 @@
 #pragma once
 #include "Virus.h"
+
 class Dengue:public Virus 
 {
 private:
@@ -9,7 +10,7 @@ public:
 	~Dengue();
 	Dengue(Dengue *vr);
 	void DoBorn();
-	void DoClone();
+	void DoClone(std::list<Virus*> &m_virusList);
 	void DoDie();
 	void InitResistance();
 
