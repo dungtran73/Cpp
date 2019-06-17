@@ -59,7 +59,8 @@ void Patient::TakeMedicine(int medicine_resistance)
 		}
 		else
 		{
-			(*it)->DoClone(m_virusList);
+			list<Virus*> m_virusListTemp = (*it)->DoClone();
+			m_virusList.insert(m_virusList.begin(), m_virusListTemp.begin(), m_virusListTemp.end());
 			it++;
 		}
 	}

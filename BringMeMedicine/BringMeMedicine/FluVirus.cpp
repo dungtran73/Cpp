@@ -28,10 +28,12 @@ void FluVirus::DoBorn()
 	InitResistance();
 }
 
-void FluVirus::DoClone(std::list<Virus*> &m_virusList)
+std::list<Virus*> FluVirus::DoClone()
 {
+	std::list<Virus*> m_virusListTemp;
 	Virus *vr = new FluVirus(this);
-	m_virusList.push_front(vr);
+	m_virusListTemp.push_front(vr);
+	return m_virusListTemp;
 }
 
 void FluVirus::DoDie()
