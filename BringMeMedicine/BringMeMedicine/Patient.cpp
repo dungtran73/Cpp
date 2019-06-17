@@ -63,6 +63,7 @@ void Patient::TakeMedicine(int medicine_resistance)
 			m_virusList.insert(m_virusList.begin(), m_virusListTemp.begin(), m_virusListTemp.end());
 			it++;
 		}
+		
 	}
 	for (list<Virus*>::iterator i = m_virusList.begin(); i != m_virusList.end(); i++)
 	{
@@ -75,10 +76,15 @@ void Patient::TakeMedicine(int medicine_resistance)
 	{
 		DoDie();
 	}
+	
 }
 
 void Patient::DoDie()
 {
+	for (list<Virus*>::iterator i = m_virusList.begin(); i != m_virusList.end(); i++)
+	{
+		delete (*i);
+	}
 	m_virusList.clear();
 	m_state = DIE;
 }
