@@ -22,7 +22,7 @@ int main()
 			cout << "Medicin: " << medicine_resistance << endl;
 			p->TakeMedicine(medicine_resistance);
 		}
-		else break;
+
 	}
 	cout << "State :" << p->GetState()<<endl;
 	delete p;

@@ -76,7 +76,13 @@ void Patient::TakeMedicine(int medicine_resistance)
 	{
 		DoDie();
 	}
-	
+	if (TotalVirusResistance==0)
+	{
+		cout << "All viruses dead\n";
+		delete this;
+		system("pause");
+		exit(0);
+	}
 }
 
 void Patient::DoDie()
