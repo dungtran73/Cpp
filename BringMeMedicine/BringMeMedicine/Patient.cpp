@@ -79,6 +79,7 @@ void Patient::TakeMedicine(int medicine_resistance)
 
 void Patient::DoDie()
 {
+	m_virusList.clear();
 	m_state = DIE;
 }
 
