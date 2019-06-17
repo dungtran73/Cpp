@@ -41,13 +41,15 @@ void Dengue::DoBorn()
 	}
 }
 
-void Dengue::DoClone(std::list<Virus*> &m_virusList)
+std::list<Virus*> Dengue::DoClone()
 {
+	std::list<Virus*> m_virusListTemp;
 	Virus *vr = new Dengue(this);
 	Virus *vr2 = new Dengue(this);
-	m_virusList.push_front(vr);
-	m_virusList.push_front(vr2);
+	m_virusListTemp.push_front(vr);
+	m_virusListTemp.push_front(vr2);
 	//push front to avoid looping over new element
+	return m_virusListTemp;
 }
 
 void Dengue::DoDie()

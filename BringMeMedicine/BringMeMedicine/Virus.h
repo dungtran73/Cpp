@@ -15,7 +15,7 @@ public:
 	void LoadADNInformation();
 	void ReduceResistance(int);
 	virtual void DoBorn() = 0;
-	virtual void DoClone(std::list<Virus*> &m_virusList) = 0;
+	virtual std::list<Virus*> DoClone() = 0;
 	virtual void DoDie() = 0;
 	virtual void InitResistance()=0;
 	virtual int GetResistance()=0;

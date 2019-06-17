@@ -10,7 +10,7 @@ public:
 	~Dengue();
 	Dengue(Dengue *vr);
 	void DoBorn();
-	void DoClone(std::list<Virus*> &m_virusList);
+	std::list<Virus*> DoClone();
 	void DoDie();
 	void InitResistance();
 
