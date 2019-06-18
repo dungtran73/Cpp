@@ -1,6 +1,6 @@
 #pragma once
 #include "Virus.h"
-
+#include <string.h>
 class FluVirus:public Virus
 {
 private:

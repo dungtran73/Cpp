@@ -17,7 +17,13 @@ FluVirus::~FluVirus()
 FluVirus::FluVirus(FluVirus * vr)
 {
 	this->m_color = vr->m_color;
-	this->m_dna = vr->m_dna;
+	this->m_dna = new char[strlen(vr->m_dna) + 1];
+	for (int i = 0; i < strlen(vr->m_dna); i++)
+	{
+		this->m_dna[i] = vr->m_dna[i];
+	}
+	this->m_dna[strlen(vr->m_dna)] = '\0';
+
 	this->m_resistance = vr->m_resistance;
 }
 
