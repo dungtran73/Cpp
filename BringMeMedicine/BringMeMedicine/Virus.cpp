@@ -15,8 +15,6 @@ Virus::~Virus()
 
 Virus::Virus(Virus * a)
 {
-	m_dna = a->m_dna;
-	m_resistance = a->m_resistance;
 }
 
 void Virus::LoadADNInformation()
@@ -29,7 +27,7 @@ void Virus::LoadADNInformation()
 		int len = 0;
 		while ((ch = getc(fp)) != EOF)
 		{
-			cout << ch;
+			//cout << ch;
 			len++;
 		}
 		m_dna = new char[len + 1];
