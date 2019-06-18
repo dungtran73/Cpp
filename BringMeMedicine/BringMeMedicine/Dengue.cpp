@@ -54,6 +54,7 @@ std::list<Virus*> Dengue::DoClone()
 
 void Dengue::DoDie()
 {
+	delete m_dna;
 	delete this;
 }
 

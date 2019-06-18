@@ -6,6 +6,7 @@ FluVirus::FluVirus()
 {
 	DoBorn();
 	InitResistance();
+	//std::cout << m_dna<<std::endl;
 }
 
 
@@ -38,6 +39,7 @@ std::list<Virus*> FluVirus::DoClone()
 
 void FluVirus::DoDie()
 {
+	delete m_dna;
 	delete this;
 }
 
