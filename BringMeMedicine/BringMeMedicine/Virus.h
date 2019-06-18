@@ -10,7 +10,7 @@ protected:
 	int m_resistance;
 public:
 	Virus();
-	~Virus();
+	virtual ~Virus();
 	Virus(Virus *a);
 	void LoadADNInformation();
 	void ReduceResistance(int);
